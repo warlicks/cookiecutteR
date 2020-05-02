@@ -1,0 +1,7 @@
+^cookiecuttR\.Rproj$
+^\.Rproj\.user$
+^Makefile$
+^README\.Rmd$
+^\.travis\.yml$
+^appveyor\.yml$
+^LICENSE\.md$
