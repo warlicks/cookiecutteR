@@ -17,3 +17,7 @@ Suggests:
     testthat,
     spelling
 Language: en-US
+Imports: 
+    rstudioapi,
+    usethis,
+    utils
