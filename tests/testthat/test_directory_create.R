@@ -8,7 +8,7 @@ expected_structure <- c("","data", "data/external", "data/interim",
                         "notebooks", "references", "reports", "reports/figures",
                         "src", "src/R", "src/man", "src/tests", "src/tests/testthat")
 # Create New Project
-test_dir <- "../fake_project_test"
+test_dir <- file.path("..", "test_files", "test_project")
 
 # Clean UP From Past Tests.
 if (dir.exists(test_dir)) {
