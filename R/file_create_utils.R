@@ -8,21 +8,11 @@
 #'
 
 create_file_structure <- function(project_root){
+
     if (dir.exists(project_root)) {
         stop("Directory Already Exists")
     } else {
-
         dir.create(project_root, recursive = TRUE)
-    }
-
-    # Create a Rstudio project
-    if (rstudioapi::isAvailable()) {
-        rstudioapi::initializeProject(path = project_root)
-    } else {
-        file.create(file.path(project_root,
-                              paste(basename(project_root), ".Rproj", sep = "")
-        )
-        )
     }
 
     # Create folders for raw, exeternal intermediate and proccesd data.
@@ -45,6 +35,37 @@ create_file_structure <- function(project_root){
     dir.create(file.path(project_root, 'src/man'), recursive = TRUE)
     dir.create(file.path(project_root, 'src/tests/testthat'), recursive = TRUE)
 
-    usethis::ui_done("Directory Structure Created")
+    if (rstudioapi::isAvailable()) {
+        usethis:::use_rstudio()
+    }
 
+}
+
+create_license_file <- function(project_root, license, author){
+
+    copyright_data <- list(name = author, year = format(Sys.Date(), '%Y'))
+    out_path <- file.path(project_root, 'LICENSE.md')
+    if (license == "MIT") {
+        copy_template(out_path, 'license-mit.md', copyright_data)
+    } else if (license == 'Apache 2.0') {
+        copy_template(out_path, 'license-apache-2.0.md', copyright_data)
+    } else if (license == "GPL V3") {
+        copy_template(out_path, 'license-GPL-3.md', copyright_data)
+    } else if (license == "AGPL V3") {
+        copy_template(out_path, 'license-AGPL-3.md', copyright_data)
+    } else if (license == "LGPL V3") {
+        copy_template(out_path, 'license-LGPL-2.1.md', copyright_data)
+    } else if (license == "CCBY 4.0") {
+        copy_template(out_path, 'license-ccby-4.md', copyright_data)
+    } else if (license == 'CC0') {
+        copy_template(out_path, 'license-cc0.md', copyright_data)
+    } else if (license == "No License File") {
+        invisible()
+    }
+}
+
+copy_template <- function(path, template, data=list()){
+    template_path <- fs::path_package('usethis', 'templates', template)
+    template_text = readLines(template_path)
+    writeLines(whisker::whisker.render(template_text, data), path)
 }
