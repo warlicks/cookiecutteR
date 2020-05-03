@@ -14,6 +14,10 @@ r:
   - release
   - oldrel
   - devel
+jobs:
+  exclude:
+    - os: osx
+    - r: devel
 
 after_success:
   - Rscript -e 'covr::codecov()'
