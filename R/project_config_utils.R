@@ -19,9 +19,8 @@ project_config <- function(config_list=NULL){
                                                  "No License File"),
                                                title = 'Select A License')
 
-         git_status <- utils::select.list(c("Yes", "No"),
-                                          title = "Enable A git repo?",
-                                          preselect = "Yes")
+         git_status <- utils::select.list(c(TRUE, FALSE),
+                                          title = "Enable A git repo?")
 
         selected_ci <- utils::select.list(c('Travis CI', 'GitHub Actions',
                                             'Gitlab CI', 'Jenkins',
