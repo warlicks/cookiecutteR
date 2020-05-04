@@ -22,4 +22,6 @@ Imports:
     usethis,
     utils,
     fs,
-    whisker
+    whisker,
+    git2r,
+    assertthat
