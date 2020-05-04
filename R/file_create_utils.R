@@ -1,7 +1,6 @@
 #' Title
 #'
-#' @param project_name
-#' @param path
+#' @param project_root
 #'
 #' @return
 #' @keywords internal
@@ -36,9 +35,9 @@ create_file_structure <- function(project_root){
     dir.create(file.path(project_root, 'src/tests/testthat'), recursive = TRUE)
 
     #TO DO: Fix this to use the tempalte from usethis
-    if (rstudioapi::isAvailable()) {
-        usethis:::use_rstudio()
-    }
+    #if (rstudioapi::isAvailable()) {
+    #    usethis:::use_rstudio()
+    #}
 
 }
 
