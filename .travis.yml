@@ -17,7 +17,7 @@ r:
 jobs:
   exclude:
     - os: osx
-    - r: devel
+      r: devel
 
 after_success:
   - Rscript -e 'covr::codecov()'
