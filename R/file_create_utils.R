@@ -35,12 +35,22 @@ create_file_structure <- function(project_root){
     dir.create(file.path(project_root, 'src/man'), recursive = TRUE)
     dir.create(file.path(project_root, 'src/tests/testthat'), recursive = TRUE)
 
+    #TO DO: Fix this to use the tempalte from usethis
     if (rstudioapi::isAvailable()) {
         usethis:::use_rstudio()
     }
 
 }
 
+#' Title
+#'
+#' @param project_root
+#' @param license
+#' @param author
+#'
+#' @return
+#' @keywords internal
+#'
 create_license_file <- function(project_root, license, author){
 
     copyright_data <- list(name = author, year = format(Sys.Date(), '%Y'))
@@ -64,6 +74,61 @@ create_license_file <- function(project_root, license, author){
     }
 }
 
+#' Title
+#'
+#' @param project_root
+#' @param ci_systems
+#'
+#' @return
+#' @keywords internal
+#'
+#' @examples
+create_ci_configs <- function(project_root, ci_systems){
+    for (i in ci_systems) {
+        if (i == 'Travis CI') {
+            outpath <- file.path(project_root, '.travis.yml')
+            copy_template(outpath, 'travis.yml')
+        } else if (i == 'GitHub Actions') {
+            message('Not Yet Implemented. Please Manually configure')
+
+        } else if (i == 'Gitlab CI') {
+            outpath <- file.path(project_root, 'gitlab-ci.yml')
+            copy_template(outpath, 'gitlab-ci.yml')
+        } else if (i == "Jenkins") {
+            outpath <- file.path(project_root, 'jenkinsfile')
+            copy_template(outpath, 'Jenkinsfile')
+        } else if (i == "Circle CI") {
+            circleci_dir <- file.path(project_root, ".circleci")
+            if (!dir.exists(circleci_dir)) {
+                dir.create(circleci_dir)
+            }
+            outpath <- file.path(circleci_dir, "config.yml")
+            copy_template(outpath, "circleci-config.yml")
+        } else if (i == "AppVeyor") {
+            outpath <- file.path(project_root, "appveyor.yml")
+            copy_template(outpath, "appveyor.yml")
+        } else if (i == "None") {
+            invisible()
+        }
+    }
+}
+
+create_makefile <- function(project_root){
+    outpath <- file.path(project_root, 'Makefile')
+    copy_template(outpath, 'Makefile')
+}
+
+#' Title
+#'
+#' @param path
+#' @param template
+#' @param data
+#'
+#' @return
+#' @keywords internal
+#'
+#'
+#'
 copy_template <- function(path, template, data=list()){
     template_path <- fs::path_package('usethis', 'templates', template)
     template_text = readLines(template_path)
