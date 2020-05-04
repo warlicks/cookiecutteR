@@ -9,26 +9,27 @@ project_config <- function(config_list=NULL){
         dir_name <- gsub(' ', '_', tolower(project_name))
         dir_name <- gsub('"', '', dir_name)
 
-        selected_license <- select.list(c("MIT",
-                                          "Apache 2.0",
-                                          "GPL V3",
-                                          "AGPL V3",
-                                          "LGPL V3",
-                                          "CCBY 4.0",
-                                          "CC0",
-                                          "No License File"),
-                                        title = 'Select A License',
-                                        preselect = "MIT")
+        selected_license <- utils::select.list(c("MIT",
+                                                 "Apache 2.0",
+                                                 "GPL V3",
+                                                 "AGPL V3",
+                                                 "LGPL V3",
+                                                 "CCBY 4.0",
+                                                 "CC0",
+                                                 "No License File"),
+                                               title = 'Select A License')
 
-         git_status <- select.list(c("Yes", "No"),
-                                  title = "Enable A git repo?",
-                                  preselect = "Yes")
+         git_status <- utils::select.list(c("Yes", "No"),
+                                          title = "Enable A git repo?",
+                                          preselect = "Yes")
 
-        selected_ci <- select.list(c('Travis CI', 'GitHub Actions', 'Gitlab CI',
-                                     "Jenkins", "Circle CI", " AppVeyor", "NULL"),
-                                   title = "Select A Continious Intergration",
-                                   preselect = "GitHub Actions"
-        )
+        selected_ci <- utils::select.list(c('Travis CI', 'GitHub Actions',
+                                            'Gitlab CI', 'Jenkins',
+                                            'Circle CI', 'AppVeyor',
+                                            'None'),
+                                          title = "Select A Continious Intergration",
+                                          preselect = "GitHub Actions"
+                                              )
 
         return(list(project_name = project_name,
                     dir_name = dir_name,
