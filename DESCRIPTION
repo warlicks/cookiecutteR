@@ -20,4 +20,6 @@ Language: en-US
 Imports: 
     rstudioapi,
     usethis,
-    utils
+    utils,
+    fs,
+    whisker
