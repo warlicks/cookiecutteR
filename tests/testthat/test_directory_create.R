@@ -26,10 +26,6 @@ test_that("An error occurs if we try to create the directory again",
                  )
     )
 
-test_that('Check MakeFile Exists',
-          expect_true("Makefile" %in% list.files(test_dir))
-          )
-
 # Clean Up
-#unlink(test_dir, recursive = TRUE, force = TRUE)
+unlink(test_dir, recursive = TRUE, force = TRUE)
 

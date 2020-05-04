@@ -49,3 +49,5 @@ test_that("LGPL Creation", {
     cookiecutteR:::create_license_file(file_path, "LGPL V3", author)
     expect_equal(readLines(license_md)[1], '### GNU LESSER GENERAL PUBLIC LICENSE')
 })
+
+unlink(file_path, recursive = TRUE, force = TRUE)
