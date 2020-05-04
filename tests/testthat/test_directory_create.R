@@ -18,7 +18,7 @@ cookiecutteR:::create_file_structure(test_dir)
 
 # Run the Test
 test_that('Check that file directory matches expected directory',
-    expect_equivalent(list.dirs(test_dir, full.names = FALSE), expected_structure)
+    expect_setequal(list.dirs(test_dir, full.names = FALSE), expected_structure)
 )
 
 test_that("An error occurs if we try to create the directory again",
