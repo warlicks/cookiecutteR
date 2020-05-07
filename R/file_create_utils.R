@@ -1,8 +1,7 @@
-#' Title
+#' Create Project Directories.
 #'
-#' @param project_root
+#' @param project_root root directory for the project being created.
 #'
-#' @return
 #' @keywords internal
 #'
 
@@ -41,15 +40,23 @@ create_file_structure <- function(project_root){
 
 }
 
-#' Title
+#' Create License File For Project
 #'
-#' @param project_root
-#' @param license
-#' @param author
+#' The licence used for the project is interactively selected when the project
+#' is created. License options from \code{\link[usethis]{use_mit_license}}
+#' are avaliable. For internal use. Users should rely on funtions
+#' \code{\link[usethis]{use_mit_license}} rather than calling \code{create_license_file}
+#' directly.
 #'
-#' @return
+#' @param project_root root directory for the project being created.
+#' @param license the license selected interactively when
+#' \code{\link{create_new_project}} is called. The license options from
+#' \code{\link[usethis]{use_mit_license}}
+#' @param author The author of the project
+#'
 #' @keywords internal
 #'
+
 create_license_file <- function(project_root, license, author){
 
     copyright_data <- list(name = author, year = format(Sys.Date(), '%Y'))
@@ -73,15 +80,20 @@ create_license_file <- function(project_root, license, author){
     }
 }
 
-#' Title
+#' Add Continious Intergration Configuration File
 #'
-#' @param project_root
-#' @param ci_systems
+#' Desired configuration files are created as part of the project creation
+#' process. CI options included in \code{\link[usethis]{use_travis}} are
+#' avliable.  For internal use. Users should rely on funtions
+#' \code{\link[usethis]{use_travis}} rather than calling \code{create_ci_configs}
+#' directly.
 #'
-#' @return
+#' @param project_root root directory for the project being created.
+#' @param ci_systems a vector of CI systems selected when \code{\link{create_new_project}} is called
+#'
 #' @keywords internal
 #'
-#' @examples
+
 create_ci_configs <- function(project_root, ci_systems){
     for (i in ci_systems) {
         if (i == 'Travis CI') {
@@ -112,22 +124,39 @@ create_ci_configs <- function(project_root, ci_systems){
     }
 }
 
+
+#' Add a Makefile to the project
+#'
+#'For internal use. Users should rely on funtions
+#' \code{\link[usethis]{use_travis}} rather than calling \code{create_makefile}
+#' directly.
+#'
+#' @param project_root root directory for the project being created.
+#'
+#'
+#' @keywords internal
+#'
+
 create_makefile <- function(project_root){
     outpath <- file.path(project_root, 'Makefile')
     copy_template(outpath, 'Makefile')
 }
 
-#' Title
+
+#' Use A Template to Add Project Infastructure.
 #'
-#' @param path
-#' @param template
-#' @param data
+#' For internal use. Users should call \code{\link[usethis]{use_template}}
+#' instead.
 #'
-#' @return
+#' @param path path where file should be added.
+#' @param template Name of the template to use.  Uses the templates included in \code{\link[usethis]{use_usethis}}.
+#' @param data a list providing data, like author or project name to add to
+#' the template.
+#'
 #' @keywords internal
 #'
 #'
-#'
+
 copy_template <- function(path, template, data=list()){
     template_path <- fs::path_package('usethis', 'templates', template)
     template_text = readLines(template_path)

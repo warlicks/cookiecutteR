@@ -2,16 +2,19 @@
 % Please edit documentation in R/create_new_project.R
 \name{create_new_project}
 \alias{create_new_project}
-\title{Title}
+\title{Create A New Project}
 \usage{
-create_new_project(project_name = NULL, path = ".")
+create_new_project(path = ".")
 }
 \arguments{
-\item{path}{}
-}
-\value{
-
+\item{path}{directory where the project should be created. Don't
+include the project name. Defaults to the current directory.}
 }
 \description{
-Title
+Creates a new project using the \href{https://drivendata.github.io/cookiecutter-data-science/}{Cooiecutter for Data Science} structure.
+}
+\examples{
+\donttest{
+create_new_project()
+}
 }
