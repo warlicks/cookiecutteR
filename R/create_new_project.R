@@ -8,9 +8,9 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \donttest{\dontrun{
 #' create_new_project()
-#' }
+#' }}
 create_new_project <- function(path='.'){
     config <- project_config()
     project_root <- file.path(path, config$dir_name)
