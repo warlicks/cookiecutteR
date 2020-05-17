@@ -24,4 +24,5 @@ Imports:
     fs,
     whisker,
     git2r,
-    assertthat
+    assertthat,
+    renv
