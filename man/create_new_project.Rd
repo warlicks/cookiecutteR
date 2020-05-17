@@ -14,7 +14,7 @@ include the project name. Defaults to the current directory.}
 Creates a new project using the \href{https://drivendata.github.io/cookiecutter-data-science/}{Cooiecutter for Data Science} structure.
 }
 \examples{
-\donttest{\dontrun{
+\donttest{
 create_new_project()
-}}
+}
 }

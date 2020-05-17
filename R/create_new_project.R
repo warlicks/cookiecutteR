@@ -8,18 +8,31 @@
 #' @export
 #'
 #' @examples
-#' \donttest{\dontrun{
+#' \donttest{
 #' create_new_project()
-#' }}
+#' }
+
 create_new_project <- function(path='.'){
     config <- project_config()
+
     project_root <- file.path(path, config$dir_name)
-    usethis::create_project(project_root, open = FALSE)
+
     create_file_structure(project_root)
-    usethis::use_mit_license()
-    # create_license_file(project_root,
-    #                     config$selected_license,
-    #                     config$author)
+
+    create_license_file(project_root,
+                        config$selected_license,
+                        config$author)
+
+    create_makefile(project_root)
+
+    enable_git(project_root, config$git_status, config$set_git_remote)
+
+    create_ci_configs(project_root, config$selected_ci)
+
+    if (config$renv_status) {
+        renv::init(project = project_root, bare = TRUE, restart = FALSE)
+    }
+
 
 }
 
