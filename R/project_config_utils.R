@@ -19,8 +19,10 @@ project_config <- function(config_list=NULL){
                                                  "No License File"),
                                                title = 'Select A License')
 
-         git_status <- utils::select.list(c(TRUE, FALSE),
+        git_status <- utils::select.list(c(TRUE, FALSE),
                                           title = "Enable A git repo?")
+
+        set_git_remote <- readline("Add Remote Repository [Enter for no remote]: ")
 
         selected_ci <- utils::select.list(c('Travis CI', 'GitHub Actions',
                                             'Gitlab CI', 'Jenkins',
@@ -28,7 +30,10 @@ project_config <- function(config_list=NULL){
                                             'None'),
                                           title = "Select A Continious Intergration",
                                           preselect = "GitHub Actions"
-                                              )
+                                          )
+
+        renv_status <- utils::select.list(c(TRUE, FALSE),
+                                          title = 'Use renv for pacakge managment?')
 
         return(list(project_name = project_name,
                     dir_name = dir_name,
@@ -36,7 +41,9 @@ project_config <- function(config_list=NULL){
                     author = author,
                     selected_license = selected_license,
                     git_status = git_status,
-                    selected_ci = selected_ci)
+                    set_git_remote = set_git_remote,
+                    selected_ci = selected_ci,
+                    renv_status = renv_status)
         )
     }
 
