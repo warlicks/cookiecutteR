@@ -8,14 +8,14 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' create_new_project()
 #' }
 
 create_new_project <- function(path='.'){
     config <- project_config()
 
-    project_root <- file.path(path, config$dir_name)
+    project_root <- file.path(gsub("/$", "", path), config$dir_name)
 
     create_file_structure(project_root)
 
@@ -30,9 +30,28 @@ create_new_project <- function(path='.'){
     create_ci_configs(project_root, config$selected_ci)
 
     if (config$renv_status) {
-        renv::init(project = project_root, bare = TRUE, restart = FALSE)
+        renv::consent(TRUE)
+        renv::init(project = normalizePath(project_root),
+                   bare = TRUE,
+                   restart = FALSE)
     }
 
+    if (rstudioapi::isAvailable()) {
+        rstudio_project = file.path(project_root,
+                                                  paste(config$dir_name,
+                                                        ".Rproj",
+                                                        sep = "")
+                                                  )
+
+
+        copy_template(rstudio_project, "template.Rproj")
+
+        rstudioapi::openProject(rstudio_project, newSession = TRUE)
+
+    } else {
+        file.create(".here")
+
+    }
 
 }
 
