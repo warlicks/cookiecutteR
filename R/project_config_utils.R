@@ -29,7 +29,7 @@ project_config <- function(config_list=NULL){
                                             'Circle CI', 'AppVeyor',
                                             'None'),
                                           title = "Select A Continious Intergration",
-                                          preselect = "GitHub Actions"
+                                          multiple = TRUE
                                           )
 
         renv_status <- utils::select.list(c(TRUE, FALSE),
