@@ -17,12 +17,16 @@ test_that("Test Git Enabled", {
     cookiecutteR:::enable_git(test_directory, TRUE, "")
     expect_true(git2r::in_repository(test_directory))
     expect_equal(length(git2r::remote_url(test_directory)), 0)
+    expect_true(file.exists(file.path(test_directory, '.gitignore')))
 })
 
 test_that("Test Git Remote Set", {
     cookiecutteR:::enable_git(test_directory, TRUE, "fake.git")
     expect_true(git2r::in_repository(test_directory))
     expect_equal(git2r::remote_url(test_directory), "fake.git")
+    expect_true(file.exists(file.path(test_directory, '.gitignore')))
 })
+
+
 
 unlink(test_directory, recursive = TRUE, force = TRUE)
