@@ -19,6 +19,7 @@ create_new_project <- function(path='.'){
 
     create_file_structure(project_root)
 
+
     create_license_file(project_root,
                         config$selected_license,
                         config$author)
@@ -45,11 +46,13 @@ create_new_project <- function(path='.'){
 
 
         copy_template(rstudio_project, "template.Rproj")
-
+        usethis::ui_done("R Studio Project created")
+        usethis::ui_info("Activate project in a new session")
         rstudioapi::openProject(rstudio_project, newSession = TRUE)
 
     } else {
         file.create(".here")
+        usethis::ui_done(".here file created")
 
     }
 

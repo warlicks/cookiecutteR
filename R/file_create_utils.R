@@ -33,11 +33,7 @@ create_file_structure <- function(project_root){
     dir.create(file.path(project_root, 'src/man'), recursive = TRUE)
     dir.create(file.path(project_root, 'src/tests/testthat'), recursive = TRUE)
 
-    #TO DO: Fix this to use the tempalte from usethis
-    #if (rstudioapi::isAvailable()) {
-    #    usethis:::use_rstudio()
-    #}
-
+    usethis::ui_done('File structure created')
 }
 
 #' Create License File For Project
@@ -78,6 +74,8 @@ create_license_file <- function(project_root, license, author){
     } else if (license == "No License File") {
         invisible()
     }
+
+    usethis::ui_done(paste("Created", license, 'license file', sep = ' '))
 }
 
 #' Add Continious Intergration Configuration File
@@ -122,6 +120,12 @@ create_ci_configs <- function(project_root, ci_systems){
             invisible()
         }
     }
+
+    usethis::ui_done(paste('Config files for',
+                           paste(ci_systems, collapse = ', '),
+                           'created',
+                           sep = ' ')
+                     )
 }
 
 
@@ -140,6 +144,8 @@ create_ci_configs <- function(project_root, ci_systems){
 create_makefile <- function(project_root){
     outpath <- file.path(project_root, 'Makefile')
     copy_template(outpath, 'Makefile')
+
+    usethis::ui_done("Makefile created")
 }
 
 
