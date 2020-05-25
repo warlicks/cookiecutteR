@@ -18,4 +18,4 @@ test_that('Check that renv files are created', {
 
 })
 
-unlink(test_directory, recursive = TRUE)
+unlink(full_test_path, recursive = TRUE)
