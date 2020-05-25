@@ -4,6 +4,13 @@
 devtools::load_all(".")
 library(testthat)
 
+project_path <- "~/Documents/creation_test"
+if (dir.exists(project_path)) {
+    unlink(project_path, recursive = TRUE, force = TRUE)
+}
+
+
+create_new_project("~/Documents/")
 # Project config to use:
 # creation_test
 # "unit test for creation"
@@ -13,50 +20,50 @@ library(testthat)
 # "fake.git"
 # 1 (Travis CI), 6 (AppVeyor)
 # 1 Enable renv
-create_new_project("~/Documents/")
+
 
 #
 context("Test That The Project Directory is Created")
 
-# Set Up For Test
-expected_structure <- c("","data", "data/external", "data/interim",
-                        "data/processed", "data/raw", "docs", "models",
-                        "notebooks", "references", "reports", "reports/figures",
-                        "src", "src/R", "src/man", "src/tests", "src/tests/testthat")
+
 
 test_that('Check that file directory matches expected directory', {
     # File Structure is right
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "data")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "data/external")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "data/interim")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "data/processed")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "data/raw")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "docs")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "models")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "notebooks")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "references")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "reports/figures")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "src/man")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "src/R")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "src/tests/testthat")))
+    expect_true(dir.exists(file.path(project_path, "data")))
+    expect_true(dir.exists(file.path(project_path, "data/external")))
+    expect_true(dir.exists(file.path(project_path, "data/interim")))
+    expect_true(dir.exists(file.path(project_path, "data/processed")))
+    expect_true(dir.exists(file.path(project_path, "data/raw")))
+    expect_true(dir.exists(file.path(project_path, "docs")))
+    expect_true(dir.exists(file.path(project_path, "models")))
+    expect_true(dir.exists(file.path(project_path, "notebooks")))
+    expect_true(dir.exists(file.path(project_path, "references")))
+    expect_true(dir.exists(file.path(project_path, "reports/figures")))
+    expect_true(dir.exists(file.path(project_path, "src/man")))
+    expect_true(dir.exists(file.path(project_path, "src/R")))
+    expect_true(dir.exists(file.path(project_path, "src/tests/testthat")))
 
     # Git is set up
-    expect_true(git2r::in_repository("~/Documents/creation_test"))
-    expect_equal(git2r::remote_url("~/Documents/creation_test"), "fake.git")
-    expect_true(file.exists(file.path("~/Documents/creation_test", '.gitignore')))
+    expect_true(git2r::in_repository(project_path))
+    expect_equal(git2r::remote_url(project_path), "fake.git")
+    expect_true(file.exists(file.path(project_path, '.gitignore')))
 
     # CI Configs
-    expect_true(file.exists(file.path("~/Documents/creation_test", ".travis.yml")))
-    expect_true(file.exists(file.path("~/Documents/creation_test", "appveyor.yml")))
+    expect_true(file.exists(file.path(project_path, ".travis.yml")))
+    expect_true(file.exists(file.path(project_path, "appveyor.yml")))
 
     # License FIle
-    expect_equal(readLines(file.path("~/Documents/creation_test/", 'LICENSE.md'))[1], '# MIT License')
+    expect_equal(readLines(file.path("~/Documents/creation_test/",
+                                     'LICENSE.md'))[1],
+                 '# MIT License')
 
     # Make
-    expect_true(file.exists(file.path("~/Documents/creation_test", "Makefile")))
+    expect_true(file.exists(file.path(project_path, "Makefile")))
 
     # revn
-    expect_true(file.exists(file.path("~/Documents/creation_test", "renv/activate.R")))
-    expect_true(dir.exists(file.path("~/Documents/creation_test", "renv/library")))
+    expect_true(file.exists(file.path(project_path, "renv/activate.R")))
+    expect_true(dir.exists(file.path(project_path, "renv/library")))
     }
 )
+
+unlink(project_path, recursive = TRUE, force = TRUE)
