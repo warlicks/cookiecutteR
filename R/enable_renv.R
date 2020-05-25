@@ -17,7 +17,7 @@ enable_renv <- function(project_root, renv_status){
         renv::init(project = normalizePath(project_root),
                    bare = TRUE,
                    restart = FALSE)
-
+        renv::deactivate()
         usethis::ui_done('renv enabled')
         usethis::ui_todo('Run `renv::snapshot()` to create & updated lock file.')
     } else{
