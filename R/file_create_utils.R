@@ -5,13 +5,7 @@
 #' @keywords internal
 #'
 
-create_file_structure <- function(project_root){
-
-    if (dir.exists(project_root)) {
-        stop("Directory Already Exists")
-    } else {
-        dir.create(project_root, recursive = TRUE)
-    }
+create_file_structure <- function(project_root) {
 
     # Create folders for raw, exeternal intermediate and proccesd data.
     dir.create(file.path(project_root, "data/external"), recursive = TRUE)

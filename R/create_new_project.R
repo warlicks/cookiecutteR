@@ -16,6 +16,9 @@ create_new_project <- function(path='.'){
     config <- project_config()
 
     project_root <- file.path(gsub("/$", "", path), config$dir_name)
+    if (dir.exists(project_root)){
+        usethis::ui_stop('Directory Already Exists')
+    }
 
     if (rstudioapi::isAvailable()) {
         rstudioapi::initializeProject(project_root)
