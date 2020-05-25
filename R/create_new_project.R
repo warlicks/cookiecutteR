@@ -17,6 +17,10 @@ create_new_project <- function(path='.'){
 
     project_root <- file.path(gsub("/$", "", path), config$dir_name)
 
+    if (rstudioapi::isAvailable()) {
+        rstudioapi::initializeProject(project_root)
+    }
+
     create_file_structure(project_root)
 
 
@@ -32,24 +36,20 @@ create_new_project <- function(path='.'){
 
     enable_renv(project_root, config$renv_status)
 
-    if (rstudioapi::isAvailable()) {
-        rstudio_project = file.path(project_root,
-                                                  paste(config$dir_name,
-                                                        ".Rproj",
-                                                        sep = "")
-                                                  )
 
-
-        copy_template(rstudio_project, "template.Rproj")
-        usethis::ui_done("R Studio Project created")
-        usethis::ui_info("Activate project in a new session")
-        rstudioapi::openProject(rstudio_project, newSession = TRUE)
-
-    } else {
-        file.create(".here")
-        usethis::ui_done(".here file created")
-
-    }
+    #     #rstudioapi::documentSaveAll()
+    #     rstudioapi::openProject(project_path, newSession = TRUE)
+    #
+    #
+    #     #copy_template(rstudio_project, "template.Rproj")
+    #     #usethis::ui_done("R Studio Project created")
+    #     #usethis::ui_info("Activate project in a new session")
+    #
+    # } else {
+    #     file.create(file.path(project_root, ".here"))
+    #     usethis::ui_done(".here file created")
+    #
+    # }
 
 }
 
