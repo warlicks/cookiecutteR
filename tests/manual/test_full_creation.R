@@ -43,6 +43,7 @@ test_that('Check that file directory matches expected directory', {
     expect_true(dir.exists(file.path(project_path, "src/R")))
     expect_true(dir.exists(file.path(project_path, "src/tests/testthat")))
 
+    expect_true(file.exists(file.path(project_path, "creation_test.Rproj")))
     # Git is set up
     expect_true(git2r::in_repository(project_path))
     expect_equal(git2r::remote_url(project_path), "fake.git")
@@ -63,7 +64,6 @@ test_that('Check that file directory matches expected directory', {
     # revn
     expect_true(file.exists(file.path(project_path, "renv/activate.R")))
     expect_true(dir.exists(file.path(project_path, "renv/library")))
-    }
-)
+})
 
 unlink(project_path, recursive = TRUE, force = TRUE)
