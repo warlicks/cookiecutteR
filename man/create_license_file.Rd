@@ -11,7 +11,7 @@ create_license_file(project_root, license, author)
 
 \item{license}{the license selected interactively when
 \code{\link{create_new_project}} is called. The license options from
-\code{\link[usethis]{use_mit_license}}}
+\code{\link[usethis]{use_mit_license}} are avaliable.}
 
 \item{author}{The author of the project}
 }

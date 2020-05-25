@@ -47,7 +47,7 @@ create_file_structure <- function(project_root){
 #' @param project_root root directory for the project being created.
 #' @param license the license selected interactively when
 #' \code{\link{create_new_project}} is called. The license options from
-#' \code{\link[usethis]{use_mit_license}}
+#' \code{\link[usethis]{use_mit_license}} are avaliable.
 #' @param author The author of the project
 #'
 #' @keywords internal
