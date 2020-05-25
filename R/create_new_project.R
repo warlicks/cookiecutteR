@@ -30,12 +30,7 @@ create_new_project <- function(path='.'){
 
     create_ci_configs(project_root, config$selected_ci)
 
-    if (config$renv_status) {
-        renv::consent(TRUE)
-        renv::init(project = normalizePath(project_root),
-                   bare = TRUE,
-                   restart = FALSE)
-    }
+    enable_renv(project_root, config$renv_status)
 
     if (rstudioapi::isAvailable()) {
         rstudio_project = file.path(project_root,
