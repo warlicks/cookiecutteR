@@ -16,13 +16,15 @@ create_new_project <- function(path='.'){
     config <- project_config()
 
     project_root <- file.path(gsub("/$", "", path), config$dir_name)
-    if (dir.exists(project_root)){
+
+    if (dir.exists(project_root)) {
         usethis::ui_stop('Directory Already Exists')
     }
 
     if (rstudioapi::isAvailable()) {
         rstudioapi::initializeProject(project_root)
     }
+
 
     create_file_structure(project_root)
 
@@ -32,27 +34,13 @@ create_new_project <- function(path='.'){
                         config$author)
 
     create_makefile(project_root)
+    create_here_file(project_root)
 
     enable_git(project_root, config$git_status, config$set_git_remote)
 
     create_ci_configs(project_root, config$selected_ci)
 
     enable_renv(project_root, config$renv_status)
-
-
-    #     #rstudioapi::documentSaveAll()
-    #     rstudioapi::openProject(project_path, newSession = TRUE)
-    #
-    #
-    #     #copy_template(rstudio_project, "template.Rproj")
-    #     #usethis::ui_done("R Studio Project created")
-    #     #usethis::ui_info("Activate project in a new session")
-    #
-    # } else {
-    #     file.create(file.path(project_root, ".here"))
-    #     usethis::ui_done(".here file created")
-    #
-    # }
 
 }
 

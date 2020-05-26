@@ -143,6 +143,11 @@ create_makefile <- function(project_root){
 }
 
 
+create_here_file <- function(project_root){
+    file.create(file.path(project_root, ".here"))
+    usethis::ui_done(".here file created")
+}
+
 #' Use A Template to Add Project Infastructure.
 #'
 #' For internal use. Users should call \code{\link[usethis]{use_template}}

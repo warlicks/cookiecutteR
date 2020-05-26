@@ -2,7 +2,7 @@
 # root of the package
 
 devtools::load_all(".")
-library(testthat)
+
 
 project_path <- "~/Documents/creation_test"
 if (dir.exists(project_path)) {
@@ -26,8 +26,8 @@ create_new_project("~/Documents/")
 context("Test That The Project Directory is Created")
 
 
-
-test_that('Check that file directory matches expected directory', {
+project_path <- "~/Documents/creation_test"
+testthat::test_that('Check that file directory matches expected directory', {
     # File Structure is right
     expect_true(dir.exists(file.path(project_path, "data")))
     expect_true(dir.exists(file.path(project_path, "data/external")))
@@ -60,6 +60,10 @@ test_that('Check that file directory matches expected directory', {
 
     # Make
     expect_true(file.exists(file.path(project_path, "Makefile")))
+
+    # Here file
+    expect_true(file.exists(file.path(project_path, ".here")))
+
 
     # revn
     expect_true(file.exists(file.path(project_path, "renv/activate.R")))
