@@ -5,13 +5,7 @@
 #' @keywords internal
 #'
 
-create_file_structure <- function(project_root){
-
-    if (dir.exists(project_root)) {
-        stop("Directory Already Exists")
-    } else {
-        dir.create(project_root, recursive = TRUE)
-    }
+create_file_structure <- function(project_root) {
 
     # Create folders for raw, exeternal intermediate and proccesd data.
     dir.create(file.path(project_root, "data/external"), recursive = TRUE)
@@ -33,11 +27,7 @@ create_file_structure <- function(project_root){
     dir.create(file.path(project_root, 'src/man'), recursive = TRUE)
     dir.create(file.path(project_root, 'src/tests/testthat'), recursive = TRUE)
 
-    #TO DO: Fix this to use the tempalte from usethis
-    #if (rstudioapi::isAvailable()) {
-    #    usethis:::use_rstudio()
-    #}
-
+    usethis::ui_done('File structure created')
 }
 
 #' Create License File For Project
@@ -51,7 +41,7 @@ create_file_structure <- function(project_root){
 #' @param project_root root directory for the project being created.
 #' @param license the license selected interactively when
 #' \code{\link{create_new_project}} is called. The license options from
-#' \code{\link[usethis]{use_mit_license}}
+#' \code{\link[usethis]{use_mit_license}} are avaliable.
 #' @param author The author of the project
 #'
 #' @keywords internal
@@ -78,6 +68,8 @@ create_license_file <- function(project_root, license, author){
     } else if (license == "No License File") {
         invisible()
     }
+
+    usethis::ui_done(paste("Created", license, 'license file', sep = ' '))
 }
 
 #' Add Continious Intergration Configuration File
@@ -122,6 +114,12 @@ create_ci_configs <- function(project_root, ci_systems){
             invisible()
         }
     }
+
+    usethis::ui_done(paste('Config files for',
+                           paste(ci_systems, collapse = ', '),
+                           'created',
+                           sep = ' ')
+                     )
 }
 
 
@@ -140,8 +138,15 @@ create_ci_configs <- function(project_root, ci_systems){
 create_makefile <- function(project_root){
     outpath <- file.path(project_root, 'Makefile')
     copy_template(outpath, 'Makefile')
+
+    usethis::ui_done("Makefile created")
 }
 
+
+create_here_file <- function(project_root){
+    file.create(file.path(project_root, ".here"))
+    usethis::ui_done(".here file created")
+}
 
 #' Use A Template to Add Project Infastructure.
 #'

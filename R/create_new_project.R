@@ -17,41 +17,30 @@ create_new_project <- function(path='.'){
 
     project_root <- file.path(gsub("/$", "", path), config$dir_name)
 
+    if (dir.exists(project_root)) {
+        usethis::ui_stop('Directory Already Exists')
+    }
+
+    if (rstudioapi::isAvailable()) {
+        rstudioapi::initializeProject(project_root)
+    }
+
+
     create_file_structure(project_root)
+
 
     create_license_file(project_root,
                         config$selected_license,
                         config$author)
 
     create_makefile(project_root)
+    create_here_file(project_root)
 
     enable_git(project_root, config$git_status, config$set_git_remote)
 
     create_ci_configs(project_root, config$selected_ci)
 
-    if (config$renv_status) {
-        renv::consent(TRUE)
-        renv::init(project = normalizePath(project_root),
-                   bare = TRUE,
-                   restart = FALSE)
-    }
-
-    if (rstudioapi::isAvailable()) {
-        rstudio_project = file.path(project_root,
-                                                  paste(config$dir_name,
-                                                        ".Rproj",
-                                                        sep = "")
-                                                  )
-
-
-        copy_template(rstudio_project, "template.Rproj")
-
-        rstudioapi::openProject(rstudio_project, newSession = TRUE)
-
-    } else {
-        file.create(".here")
-
-    }
+    enable_renv(project_root, config$renv_status)
 
 }
 

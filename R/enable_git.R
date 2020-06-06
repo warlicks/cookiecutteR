@@ -17,11 +17,14 @@ enable_git <- function(project_root, choice, remote){
     if (choice) {
         git2r::init(project_root)
 
-        if (remote != "")
+        if (remote != "") {
             git2r::remote_add(project_root, name = 'origin', remote)
+            usethis::ui_info(paste('Remote set:', remote, sep = ' '))
+        }
 
         # Add ignore file
         create_git_ignore(project_root)
+        usethis::ui_done('Git repo initialized')
 
     } else {
         invisible()
@@ -32,4 +35,5 @@ create_git_ignore <- function(path){
     ignore_file_path <- file.path(path, ".gitignore")
     writeLines(c(".Rproj.user", ".Rhistory", ".Rdata", ".DS_Store"),
                ignore_file_path)
+    usethis::ui_info('.gitignore file created')
 }
