@@ -2,7 +2,10 @@
 project_config <- function(config_list=NULL){
     if (is.null(config_list)) {
 
-        project_name <- readline("Project Name: ")
+        renv_status <- utils::select.list(c(TRUE, FALSE),
+                                          preselect = FALSE,
+                                          title = 'Check if Project Name is A Valid CRAN Name')
+
         project_description <- readline("Project Description: ")
         author <- readline("Your Name (Company/Organization/Team): ")
 
@@ -35,8 +38,9 @@ project_config <- function(config_list=NULL){
         renv_status <- utils::select.list(c(TRUE, FALSE),
                                           title = 'Use renv for pacakge managment?')
 
-        return(list(project_name = project_name,
-                    dir_name = dir_name,
+
+        return(list(#project_name = project_name,
+                    #dir_name = dir_name,
                     project_description = project_description,
                     author = author,
                     selected_license = selected_license,
