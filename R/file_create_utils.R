@@ -58,28 +58,25 @@ create_file_structure <- function(project_root, check_project_name) {
 #'
 
 create_license_file <- function(project_root, license, author){
+    usethis::proj_set(project_root)
 
-    copyright_data <- list(name = author, year = format(Sys.Date(), '%Y'))
-    out_path <- file.path(project_root, 'LICENSE.md')
     if (license == "MIT") {
-        copy_template(out_path, 'license-mit.md', copyright_data)
+        usethis::use_mit_license(name = author)
     } else if (license == 'Apache 2.0') {
-        copy_template(out_path, 'license-apache-2.0.md', copyright_data)
+        usethis::use_apl2_license(name = author)
     } else if (license == "GPL V3") {
-        copy_template(out_path, 'license-GPL-3.md', copyright_data)
+        usethis::use_gpl3_license(name = author)
     } else if (license == "AGPL V3") {
-        copy_template(out_path, 'license-AGPL-3.md', copyright_data)
+        usethis::use_agpl3_license(name = author)
     } else if (license == "LGPL V3") {
-        copy_template(out_path, 'license-LGPL-2.1.md', copyright_data)
+        usethis::use_lgpl_license(name = author)
     } else if (license == "CCBY 4.0") {
-        copy_template(out_path, 'license-ccby-4.md', copyright_data)
+        usethis::use_ccby_license(name = author)
     } else if (license == 'CC0') {
-        copy_template(out_path, 'license-cc0.md', copyright_data)
+        usethis::use_cc0_license(name = author)
     } else if (license == "No License File") {
-        invisible()
+        NULL
     }
-
-    usethis::ui_done(paste("Created", license, 'license file', sep = ' '))
 }
 
 #' Add Continious Intergration Configuration File
