@@ -9,7 +9,7 @@ expected_structure <- c("", "data", "data/external", "data/interim",
                         "reports/figures", "tests", "tests/testthat")
 
 # Create New Project
-test_dir <- file.path("~", "Documents" , "test_project")
+test_dir <- file.path("~", "test_project")
 
 # Clean UP From Past Tests.
 if (dir.exists(test_dir)) {

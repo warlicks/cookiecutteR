@@ -29,4 +29,4 @@ test_that("Test Git Remote Set", {
 
 
 
-unlink(test_directory, recursive = TRUE, force = TRUE)
+unlink(file.path("~", "test_files"), recursive = TRUE, force = TRUE)
