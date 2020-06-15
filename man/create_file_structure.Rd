@@ -4,10 +4,13 @@
 \alias{create_file_structure}
 \title{Create Project Directories.}
 \usage{
-create_file_structure(project_root)
+create_file_structure(project_root, check_project_name)
 }
 \arguments{
 \item{project_root}{root directory for the project being created.}
+
+\item{check_project_name}{check if project name is a valid name for CRAN.
+Set via config options.}
 }
 \description{
 Create Project Directories.

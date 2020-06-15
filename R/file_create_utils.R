@@ -1,6 +1,8 @@
 #' Create Project Directories.
 #'
 #' @param project_root root directory for the project being created.
+#' @param check_project_name check if project name is a valid name for CRAN.
+#' Set via config options.
 #'
 #' @keywords internal
 #'
