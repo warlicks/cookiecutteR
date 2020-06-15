@@ -2,15 +2,15 @@
 project_config <- function(config_list=NULL){
     if (is.null(config_list)) {
 
-        renv_status <- utils::select.list(c(TRUE, FALSE),
-                                          preselect = FALSE,
-                                          title = 'Check if Project Name is A Valid CRAN Name')
+        cran_name<- utils::select.list(c(TRUE, FALSE),
+                                       preselect = FALSE,
+                                       title = 'Check if Project Name is A Valid CRAN Name')
 
         project_description <- readline("Project Description: ")
         author <- readline("Your Name (Company/Organization/Team): ")
 
-        dir_name <- gsub(' ', '_', tolower(project_name))
-        dir_name <- gsub('"', '', dir_name)
+        # dir_name <- gsub(' ', '_', tolower(project_name))
+        # dir_name <- gsub('"', '', dir_name)
 
         selected_license <- utils::select.list(c("MIT",
                                                  "Apache 2.0",
@@ -41,6 +41,7 @@ project_config <- function(config_list=NULL){
 
         return(list(#project_name = project_name,
                     #dir_name = dir_name,
+                    cran_name = cran_name,
                     project_description = project_description,
                     author = author,
                     selected_license = selected_license,

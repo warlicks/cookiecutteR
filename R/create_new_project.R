@@ -21,12 +21,7 @@ create_new_project <- function(path='.'){
         usethis::ui_stop('Directory Already Exists')
     }
 
-    if (rstudioapi::isAvailable()) {
-        rstudioapi::initializeProject(project_root)
-    }
-
-
-    create_file_structure(project_root)
+    create_file_structure(project_root, config$cran_name)
 
 
     create_license_file(project_root,
