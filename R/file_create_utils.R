@@ -5,28 +5,36 @@
 #' @keywords internal
 #'
 
-create_file_structure <- function(project_root) {
+create_file_structure <- function(project_root, check_project_name) {
+    usethis::create_package(project_root,
+                            open = FALSE,
+                            check_name = check_project_name)
 
-    # Create folders for raw, exeternal intermediate and proccesd data.
+    # Create folders for raw, external intermediate and processed data.
     dir.create(file.path(project_root, "data/external"), recursive = TRUE)
     dir.create(file.path(project_root, "data/raw"), recursive = TRUE)
     dir.create(file.path(project_root, "data/interim"), recursive = TRUE)
     dir.create(file.path(project_root, "data/processed"), recursive = TRUE)
 
+
     # Create other top level directories
-    dir.create(file.path(project_root, "docs"))
     dir.create(file.path(project_root, "models"))
     dir.create(file.path(project_root, "notebooks"))
     dir.create(file.path(project_root, "references"))
+
 
     # Create report Directory
     dir.create(file.path(project_root, "reports/figures"), recursive = TRUE)
 
     # Create Directory for source code.
-    dir.create(file.path(project_root, 'src/R'), recursive = TRUE)
-    dir.create(file.path(project_root, 'src/man'), recursive = TRUE)
-    dir.create(file.path(project_root, 'src/tests/testthat'), recursive = TRUE)
+    dir.create(file.path(project_root, 'man'), recursive = TRUE)
+    #dir.create(file.path(project_root, 'tests/testthat'), recursive = TRUE)
 
+    usethis::proj_set(project_root)
+    usethis::use_testthat()
+    usethis::use_build_ignore(c("data/*", "docs/*", "models/*",
+                                "notebooks/*", "references/*")
+                              )
     usethis::ui_done('File structure created')
 }
 

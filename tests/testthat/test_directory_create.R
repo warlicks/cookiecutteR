@@ -3,19 +3,20 @@ library(testthat)
 context("Test That The Project Directory is Created")
 
 # Set Up For Test
-expected_structure <- c("","data", "data/external", "data/interim",
-                        "data/processed", "data/raw", "docs", "models",
-                        "notebooks", "references", "reports", "reports/figures",
-                        "src", "src/R", "src/man", "src/tests", "src/tests/testthat")
+expected_structure <- c("", "data", "data/external", "data/interim",
+                        "data/processed", "data/raw", "man", "models",
+                        "notebooks", "R", "references", "reports",
+                        "reports/figures", "tests", "tests/testthat")
+
 # Create New Project
-test_dir <- file.path("..", "test_files", "test_project")
+test_dir <- file.path("~", "Documents" , "test_project")
 
 # Clean UP From Past Tests.
 if (dir.exists(test_dir)) {
     unlink(test_dir, recursive = TRUE, force = TRUE)
     }
 
-cookiecutteR:::create_file_structure(test_dir)
+cookiecutteR:::create_file_structure(test_dir, FALSE)
 
 # Run the Test
 test_that('Check that file directory matches expected directory',
