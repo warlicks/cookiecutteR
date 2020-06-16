@@ -3,7 +3,7 @@
 #' Creates a new project using the \href{https://drivendata.github.io/cookiecutter-data-science/}{Cooiecutter for Data Science} structure.
 #'
 #' @param path directory where the project should be created. Don't
-#' include the project name. Defaults to the current directory.
+#' include the project name.
 #'
 #' @export
 #'
@@ -12,10 +12,10 @@
 #' create_new_project()
 #' }
 
-create_new_project <- function(path='.'){
+create_new_project <- function(path){
     config <- project_config()
 
-    project_root <- file.path(gsub("/$", "", path), config$dir_name)
+    project_root <- fs::path_expand(path)
 
     if (dir.exists(project_root)) {
         usethis::ui_stop('Directory Already Exists')

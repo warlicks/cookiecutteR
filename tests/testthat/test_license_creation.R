@@ -3,7 +3,7 @@ context("Check that the correct license file is created")
 # Setup environment for tests
 
 # Set up paths
-file_path <- file.path("~", "license_dir")
+file_path <- fs::path_expand(file.path("~", "license_dir"))
 author <- "Ford Prefect"
 
 
