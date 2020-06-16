@@ -4,11 +4,11 @@
 \alias{create_new_project}
 \title{Create A New Project}
 \usage{
-create_new_project(path = ".")
+create_new_project(path)
 }
 \arguments{
 \item{path}{directory where the project should be created. Don't
-include the project name. Defaults to the current directory.}
+include the project name.}
 }
 \description{
 Creates a new project using the \href{https://drivendata.github.io/cookiecutter-data-science/}{Cooiecutter for Data Science} structure.
