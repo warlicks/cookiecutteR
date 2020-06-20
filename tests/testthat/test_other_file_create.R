@@ -18,4 +18,10 @@ test_that('Here File Exists', {
     expect_true(file.exists(file.path(test_directory, '.here')))
 })
 
+test_that('Readme Files Exists', {
+    cookiecutteR:::create_readme(test_directory)
+    expect_true(file.exists(file.path(test_directory, 'README.Rmd')))
+})
+
+
 unlink(test_directory, recursive = TRUE)

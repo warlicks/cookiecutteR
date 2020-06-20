@@ -148,3 +148,18 @@ create_here_file <- function(project_root){
     usethis::ui_done(".here file created")
 }
 
+#' Create README.Rmd for Project.
+#'
+#' For internal use. Users should rely on functions
+#' \code{\link[usethis]{use_readme_rmd}} rather than calling \code{create_readme}
+#' directly.
+#' @param project_root root for the project being created.
+#'
+#' @return Creates a README.Rmd file in the project directory.
+#' @keywords internal
+#'
+#'
+create_readme <- function(project_root){
+    usethis::proj_set(project_root)
+    usethis::use_readme_rmd()
+}

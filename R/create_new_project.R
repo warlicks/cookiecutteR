@@ -23,6 +23,7 @@ create_new_project <- function(path){
 
     create_file_structure(project_root, config$cran_name)
 
+    create_readme(project_root)
 
     create_license_file(project_root,
                         config$selected_license,
