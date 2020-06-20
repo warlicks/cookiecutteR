@@ -8,7 +8,7 @@ if (dir.exists(test_directory)) {
     unlink(test_directory, recursive = TRUE)
 }
 cookiecutteR:::create_file_structure(test_directory, FALSE)
-cookiecutteR:::enable_git(test_directory, TRUE, 'git@github.com:warlicks/cookiecutteR.git')
+cookiecutteR:::enable_git(test_directory, TRUE, 'git@github.com:fake/fake.git')
 
 test_that("Check Creation Of None", {
     skip("Need to rethink")
