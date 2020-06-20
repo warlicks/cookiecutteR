@@ -42,16 +42,17 @@ create_file_structure <- function(project_root, check_project_name) {
 
 #' Create License File For Project
 #'
-#' The licence used for the project is interactively selected when the project
-#' is created. License options from \code{\link[usethis]{use_mit_license}}
-#' are avaliable. For internal use. Users should rely on funtions
+#' The license used for the project is interactively selected when the project
+#' is created. License options from \code{\link[usethis:licenses]{licenses}}
+#' are available. For internal use. Users should rely on functions
 #' \code{\link[usethis]{use_mit_license}} rather than calling \code{create_license_file}
 #' directly.
 #'
 #' @param project_root root directory for the project being created.
 #' @param license the license selected interactively when
 #' \code{\link{create_new_project}} is called. The license options from
-#' \code{\link[usethis]{use_mit_license}} are avaliable.
+#' \code{\link[usethis:licenses]{licenses}} are available.
+#'
 #' @param author The author of the project
 #'
 #' @keywords internal
@@ -79,46 +80,40 @@ create_license_file <- function(project_root, license, author){
     }
 }
 
-#' Add Continious Intergration Configuration File
+#' Add Continuous Integration Configuration File
 #'
 #' Desired configuration files are created as part of the project creation
-#' process. CI options included in \code{\link[usethis]{use_travis}} are
-#' avliable.  For internal use. Users should rely on funtions
-#' \code{\link[usethis]{use_travis}} rather than calling \code{create_ci_configs}
+#' process. CI options included in \code{\link[usethis:ci]{ci}} are
+#' available.  For internal use. Users should rely on functions
+#' in \strong{usethis} rather than calling \code{create_ci_configs}
 #' directly.
 #'
 #' @param project_root root directory for the project being created.
-#' @param ci_systems a vector of CI systems selected when \code{\link{create_new_project}} is called
+#' @param ci_systems a vector of CI systems selected when
+#' \code{\link{create_new_project}} is called
 #'
 #' @keywords internal
 #'
 
 create_ci_configs <- function(project_root, ci_systems){
+    usethis::proj_set(project_root)
+
     for (i in ci_systems) {
         if (i == 'Travis CI') {
-            outpath <- file.path(project_root, '.travis.yml')
-            copy_template(outpath, 'travis.yml')
+            usethis::use_travis()
         } else if (i == 'GitHub Actions') {
             message('Not Yet Implemented. Please Manually configure')
 
         } else if (i == 'Gitlab CI') {
-            outpath <- file.path(project_root, 'gitlab-ci.yml')
-            copy_template(outpath, 'gitlab-ci.yml')
+            usethis::use_gitlab_ci()
         } else if (i == "Jenkins") {
-            outpath <- file.path(project_root, 'jenkinsfile')
-            copy_template(outpath, 'Jenkinsfile')
+            usethis::use_jenkins()
         } else if (i == "Circle CI") {
-            circleci_dir <- file.path(project_root, ".circleci")
-            if (!dir.exists(circleci_dir)) {
-                dir.create(circleci_dir)
-            }
-            outpath <- file.path(circleci_dir, "config.yml")
-            copy_template(outpath, "circleci-config.yml")
+            usethis::use_circleci()
         } else if (i == "AppVeyor") {
-            outpath <- file.path(project_root, "appveyor.yml")
-            copy_template(outpath, "appveyor.yml")
+            usethis::use_appveyor()
         } else if (i == "None") {
-            invisible()
+            invisible(FALSE)
         }
     }
 
@@ -132,8 +127,8 @@ create_ci_configs <- function(project_root, ci_systems){
 
 #' Add a Makefile to the project
 #'
-#'For internal use. Users should rely on funtions
-#' \code{\link[usethis]{use_travis}} rather than calling \code{create_makefile}
+#'For internal use. Users should rely on functions
+#' \code{\link[usethis]{use_make}} rather than calling \code{create_makefile}
 #' directly.
 #'
 #' @param project_root root directory for the project being created.
@@ -143,10 +138,8 @@ create_ci_configs <- function(project_root, ci_systems){
 #'
 
 create_makefile <- function(project_root){
-    outpath <- file.path(project_root, 'Makefile')
-    copy_template(outpath, 'Makefile')
-
-    usethis::ui_done("Makefile created")
+    usethis::proj_set(project_root)
+    usethis::use_make()
 }
 
 
@@ -155,7 +148,7 @@ create_here_file <- function(project_root){
     usethis::ui_done(".here file created")
 }
 
-#' Use A Template to Add Project Infastructure.
+#' Use A Template to Add Project Infrastructure.
 #'
 #' For internal use. Users should call \code{\link[usethis]{use_template}}
 #' instead.
