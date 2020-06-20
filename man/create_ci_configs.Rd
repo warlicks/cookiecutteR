@@ -2,20 +2,21 @@
 % Please edit documentation in R/file_create_utils.R
 \name{create_ci_configs}
 \alias{create_ci_configs}
-\title{Add Continious Intergration Configuration File}
+\title{Add Continuous Integration Configuration File}
 \usage{
 create_ci_configs(project_root, ci_systems)
 }
 \arguments{
 \item{project_root}{root directory for the project being created.}
 
-\item{ci_systems}{a vector of CI systems selected when \code{\link{create_new_project}} is called}
+\item{ci_systems}{a vector of CI systems selected when
+\code{\link{create_new_project}} is called}
 }
 \description{
 Desired configuration files are created as part of the project creation
-process. CI options included in \code{\link[usethis]{use_travis}} are
-avliable.  For internal use. Users should rely on funtions
-\code{\link[usethis]{use_travis}} rather than calling \code{create_ci_configs}
+process. CI options included in \code{\link[usethis:ci]{ci}} are
+available.  For internal use. Users should rely on functions
+in \strong{usethis} rather than calling \code{create_ci_configs}
 directly.
 }
 \keyword{internal}
