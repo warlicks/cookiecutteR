@@ -19,7 +19,7 @@ create_license_file(project_root, license, author)
 The license used for the project is interactively selected when the project
 is created. License options from \code{\link[usethis:licenses]{licenses}}
 are available. For internal use. Users should rely on functions
-\code{\link[usethis]{use_mit_license}} rather than calling \code{create_license_file}
-directly.
+\code{\link[usethis:licenses]{use_mit_license}} rather than calling
+\code{create_license_file("MIT", author)} directly.
 }
 \keyword{internal}

@@ -45,8 +45,8 @@ create_file_structure <- function(project_root, check_project_name) {
 #' The license used for the project is interactively selected when the project
 #' is created. License options from \code{\link[usethis:licenses]{licenses}}
 #' are available. For internal use. Users should rely on functions
-#' \code{\link[usethis]{use_mit_license}} rather than calling \code{create_license_file}
-#' directly.
+#' \code{\link[usethis:licenses]{use_mit_license}} rather than calling
+#' \code{create_license_file("MIT", author)} directly.
 #'
 #' @param project_root root directory for the project being created.
 #' @param license the license selected interactively when

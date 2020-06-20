@@ -24,4 +24,5 @@ Imports:
     whisker,
     git2r,
     assertthat,
-    renv
+    renv,
+    rmarkdown
