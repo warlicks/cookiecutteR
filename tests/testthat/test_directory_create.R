@@ -16,6 +16,7 @@ if (dir.exists(test_dir)) {
     unlink(test_dir, recursive = TRUE, force = TRUE)
     }
 
+usethis::proj_set(test_dir, force = TRUE)
 cookiecutteR:::create_file_structure(test_dir, FALSE)
 
 # Run the Test
