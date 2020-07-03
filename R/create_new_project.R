@@ -34,7 +34,7 @@ create_new_project <- function(path){
 
     enable_git(project_root, config$git_status, config$set_git_remote)
 
-    create_ci_configs(project_root, config$selected_ci)
+    create_ci_configs(project_root, config$selected_ci, config$set_git_remote)
 
     enable_renv(project_root, config$renv_status)
 
