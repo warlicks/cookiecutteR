@@ -25,8 +25,11 @@ project_config <- function(config_list=NULL){
         git_status <- utils::select.list(c(TRUE, FALSE),
                                           title = "Enable A git repo?")
 
-        set_git_remote <- readline("Add Remote Repository [Enter for no remote]: ")
-
+        if (git_status) {
+            set_git_remote <- readline("Add Remote Repository [Enter for no remote]:")
+        } else{
+            set_git_remote <- NULL
+        }
         selected_ci <- utils::select.list(c('Travis CI', 'GitHub Actions',
                                             'Gitlab CI', 'Jenkins',
                                             'Circle CI', 'AppVeyor',
