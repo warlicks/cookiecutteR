@@ -8,10 +8,10 @@
 #'
 
 create_file_structure <- function(project_root, check_project_name) {
-    usethis::create_package(project_root,
+    usethis::ui_silence(usethis::create_package(project_root,
                             open = FALSE,
                             check_name = check_project_name)
-
+)
     # Create folders for raw, external intermediate and processed data.
     dir.create(file.path(project_root, "data/external"), recursive = TRUE)
     dir.create(file.path(project_root, "data/raw"), recursive = TRUE)
@@ -95,33 +95,41 @@ create_license_file <- function(project_root, license, author){
 #' @keywords internal
 #'
 
-create_ci_configs <- function(project_root, ci_systems){
+create_ci_configs <- function(project_root, ci_systems, remote){
     usethis::proj_set(project_root)
+    warn_string <- "Your remote does not appear to be a GitHub remote. "
+    config_string <- "Config for {i} Was Not Created"
 
     for (i in ci_systems) {
         if (i == 'Travis CI') {
-            usethis::use_travis()
-        } else if (i == 'GitHub Actions') {
-            message('Not Yet Implemented. Please Manually configure')
 
+            if (is_github(remote)) {
+                usethis::use_travis(browse = FALSE)
+            } else {
+                usethis::ui_warn(glue::glue(warn_string, config_string))
+            }
+
+        } else if (i == 'GitHub Actions') {
+            usethis::ui_todo('Github Actions Not Yet Implemented. Please Manually configure')
         } else if (i == 'Gitlab CI') {
             usethis::use_gitlab_ci()
         } else if (i == "Jenkins") {
             usethis::use_jenkins()
         } else if (i == "Circle CI") {
-            usethis::use_circleci()
+            usethis::use_circleci(browse = FALSE)
         } else if (i == "AppVeyor") {
-            usethis::use_appveyor()
+
+            if (is_github(remote)) {
+                usethis::use_appveyor(browse = FALSE)
+            } else{
+                usethis::ui_warn(glue::glue(warn_string, config_string))
+            }
+
         } else if (i == "None") {
             invisible(FALSE)
         }
     }
 
-    usethis::ui_done(paste('Config files for',
-                           paste(ci_systems, collapse = ', '),
-                           'created',
-                           sep = ' ')
-                     )
 }
 
 
@@ -161,5 +169,5 @@ create_here_file <- function(project_root){
 #'
 create_readme <- function(project_root){
     usethis::proj_set(project_root)
-    usethis::use_readme_rmd()
+    usethis::use_readme_rmd(open = FALSE)
 }
