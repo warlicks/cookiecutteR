@@ -4,7 +4,7 @@
 \alias{create_ci_configs}
 \title{Add Continuous Integration Configuration File}
 \usage{
-create_ci_configs(project_root, ci_systems)
+create_ci_configs(project_root, ci_systems, remote)
 }
 \arguments{
 \item{project_root}{root directory for the project being created.}

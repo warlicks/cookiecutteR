@@ -12,11 +12,11 @@ enable_git(project_root, choice, remote)
 \item{choice}{the choice selected interactively when
 \code{\link{create_new_project}} is called}
 
-\item{remote}{the url of the remote orign.}
+\item{remote}{the URL of the remote origin.}
 }
 \description{
-An internal method for initalizing a git repository and adding a
+An internal method for initializing a git repository and adding a
 remote origin. For internal use. Users should call
-\code{\link[git2r]{init}} directly instead.
+\code{\link[git2r]{init}} or \code{\link[usethis]{use_git}} directly instead.
 }
 \keyword{internal}
