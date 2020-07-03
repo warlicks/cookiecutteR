@@ -21,8 +21,10 @@ Imports:
     usethis,
     utils,
     fs,
-    whisker,
     git2r,
     assertthat,
     renv,
-    rmarkdown
+    rmarkdown,
+    glue
+URL: https://github.com/warlicks/cookiecutteR
+BugReports: https://github.com/warlicks/cookiecutteR/issues
