@@ -1,13 +1,13 @@
 #' Enable a git repository
 #'
-#' An internal method for initalizing a git repository and adding a
+#' An internal method for initializing a git repository and adding a
 #' remote origin. For internal use. Users should call
-#' \code{\link[git2r]{init}} directly instead.
+#' \code{\link[git2r]{init}} or \code{\link[usethis]{use_git}} directly instead.
 #'
 #' @param project_root root directory for the project being created
 #' @param choice the choice selected interactively when
 #'     \code{\link{create_new_project}} is called
-#' @param remote the url of the remote orign.
+#' @param remote the URL of the remote origin.
 #'
 #' @keywords  internal
 #'
@@ -27,7 +27,7 @@ enable_git <- function(project_root, choice, remote){
         usethis::ui_done('Git repo initialized')
 
     } else {
-        invisible()
+        invisible(NULL)
     }
 }
 
@@ -35,5 +35,13 @@ create_git_ignore <- function(path){
     ignore_file_path <- file.path(path, ".gitignore")
     writeLines(c(".Rproj.user", ".Rhistory", ".Rdata", ".DS_Store"),
                ignore_file_path)
-    usethis::ui_info('.gitignore file created')
+    usethis::ui_done('.gitignore file created')
+}
+
+is_github <- function(remote) {
+    if (remote == "") {
+        return(FALSE)
+    }
+    regex <- "github[^/:]*[:/]{1,2}([^/]+)/(.*?)(?:\\.git)?$"
+    return(grepl(regex, remote))
 }

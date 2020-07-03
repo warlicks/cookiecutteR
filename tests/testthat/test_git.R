@@ -27,6 +27,15 @@ test_that("Test Git Remote Set", {
     expect_true(file.exists(file.path(test_directory, '.gitignore')))
 })
 
+test_that("Github URL recognized", {
+    expect_false(cookiecutteR:::is_github(""))
+    expect_true(cookiecutteR:::is_github("https://github.com/warlicks/cookiecutteR"))
+    expect_true(cookiecutteR:::is_github("https://github.com/warlicks/cookiecutteR.git"))
+    expect_true(cookiecutteR:::is_github("git@github.com:warlicks/cookiecutteR.git"))
+    expect_false(cookiecutteR:::is_github("https://gitlab.com/fake/fake_reop"))
+    expect_false(cookiecutteR:::is_github("https://gitlab.com/fake/fake_repo.git"))
+    expect_false(cookiecutteR:::is_github("git@gitlab.com:fake/fake_repo.git"))
 
+})
 
-unlink(test_directory, recursive = TRUE, force = TRUE)
+unlink(file.path("~", "test_files"), recursive = TRUE, force = TRUE)

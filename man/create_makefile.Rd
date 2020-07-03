@@ -10,8 +10,8 @@ create_makefile(project_root)
 \item{project_root}{root directory for the project being created.}
 }
 \description{
-For internal use. Users should rely on funtions
-\code{\link[usethis]{use_travis}} rather than calling \code{create_makefile}
+For internal use. Users should rely on functions
+\code{\link[usethis]{use_make}} rather than calling \code{create_makefile}
 directly.
 }
 \keyword{internal}

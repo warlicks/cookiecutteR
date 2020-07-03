@@ -3,7 +3,7 @@
 #' Creates a new project using the \href{https://drivendata.github.io/cookiecutter-data-science/}{Cooiecutter for Data Science} structure.
 #'
 #' @param path directory where the project should be created. Don't
-#' include the project name. Defaults to the current directory.
+#' include the project name.
 #'
 #' @export
 #'
@@ -12,22 +12,18 @@
 #' create_new_project()
 #' }
 
-create_new_project <- function(path='.'){
+create_new_project <- function(path){
     config <- project_config()
 
-    project_root <- file.path(gsub("/$", "", path), config$dir_name)
+    project_root <- fs::path_expand(path)
 
     if (dir.exists(project_root)) {
         usethis::ui_stop('Directory Already Exists')
     }
 
-    if (rstudioapi::isAvailable()) {
-        rstudioapi::initializeProject(project_root)
-    }
+    create_file_structure(project_root, config$cran_name)
 
-
-    create_file_structure(project_root)
-
+    create_readme(project_root)
 
     create_license_file(project_root,
                         config$selected_license,
@@ -38,7 +34,7 @@ create_new_project <- function(path='.'){
 
     enable_git(project_root, config$git_status, config$set_git_remote)
 
-    create_ci_configs(project_root, config$selected_ci)
+    create_ci_configs(project_root, config$selected_ci, config$set_git_remote)
 
     enable_renv(project_root, config$renv_status)
 

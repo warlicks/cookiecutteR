@@ -10,19 +10,20 @@ if (dir.exists(project_path)) {
 }
 
 
-create_new_project("~/Documents/")
+create_new_project("~/Documents/creation_test")
 # Project config to use:
 # creation_test
 # "unit test for creation"
 # "Me"
 # 1 (MIT)
 # 1 Enable Git
-# "fake.git"
+# "github.com/fake/fake.git"
 # 1 (Travis CI), 6 (AppVeyor)
 # 1 Enable renv
 
 
 #
+library(testthat)
 context("Test That The Project Directory is Created")
 
 
@@ -34,19 +35,18 @@ testthat::test_that('Check that file directory matches expected directory', {
     expect_true(dir.exists(file.path(project_path, "data/interim")))
     expect_true(dir.exists(file.path(project_path, "data/processed")))
     expect_true(dir.exists(file.path(project_path, "data/raw")))
-    expect_true(dir.exists(file.path(project_path, "docs")))
     expect_true(dir.exists(file.path(project_path, "models")))
     expect_true(dir.exists(file.path(project_path, "notebooks")))
     expect_true(dir.exists(file.path(project_path, "references")))
     expect_true(dir.exists(file.path(project_path, "reports/figures")))
-    expect_true(dir.exists(file.path(project_path, "src/man")))
-    expect_true(dir.exists(file.path(project_path, "src/R")))
-    expect_true(dir.exists(file.path(project_path, "src/tests/testthat")))
+    expect_true(dir.exists(file.path(project_path, "man")))
+    expect_true(dir.exists(file.path(project_path, "R")))
+    expect_true(dir.exists(file.path(project_path, "tests/testthat")))
 
     expect_true(file.exists(file.path(project_path, "creation_test.Rproj")))
     # Git is set up
     expect_true(git2r::in_repository(project_path))
-    expect_equal(git2r::remote_url(project_path), "fake.git")
+    expect_equal(git2r::remote_url(project_path), "github.com/fake/fake.git")
     expect_true(file.exists(file.path(project_path, '.gitignore')))
 
     # CI Configs

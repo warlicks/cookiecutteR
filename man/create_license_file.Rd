@@ -11,15 +11,15 @@ create_license_file(project_root, license, author)
 
 \item{license}{the license selected interactively when
 \code{\link{create_new_project}} is called. The license options from
-\code{\link[usethis]{use_mit_license}} are avaliable.}
+\code{\link[usethis:licenses]{licenses}} are available.}
 
 \item{author}{The author of the project}
 }
 \description{
-The licence used for the project is interactively selected when the project
-is created. License options from \code{\link[usethis]{use_mit_license}}
-are avaliable. For internal use. Users should rely on funtions
-\code{\link[usethis]{use_mit_license}} rather than calling \code{create_license_file}
-directly.
+The license used for the project is interactively selected when the project
+is created. License options from \code{\link[usethis:licenses]{licenses}}
+are available. For internal use. Users should rely on functions
+\code{\link[usethis:licenses]{use_mit_license}} rather than calling
+\code{create_license_file("MIT", author)} directly.
 }
 \keyword{internal}
